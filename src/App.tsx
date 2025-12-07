@@ -11,7 +11,7 @@ const App: React.FC = () => {
   const renderContent = () => {
     if (activeTab === Tab.HOME) {
       return (
-        <div className="flex flex-col items-center justify-center min-h-[80vh] md:min-h-[85vh] px-4 text-center animate-fade-in font-sans relative z-10">
+        <div className="flex flex-col items-center justify-center min-h-[80vh] md:min-h-[85vh] px-4 pt-16 md:pt-0 text-center animate-fade-in font-sans relative z-10">
           {/* Animated Background Glow */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-gradient-to-r from-blue-600/15 via-indigo-600/10 to-purple-600/15 blur-[100px] md:blur-[120px] rounded-full pointer-events-none animate-gradient"></div>
 
