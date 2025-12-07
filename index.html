@@ -272,24 +272,32 @@
       overflow: hidden;
     }
 
-    /* Wave Net animation keyframes - Two directions */
-    @keyframes wave-net-1 {
+    /* Water Wave animation keyframes - Flowing curved motion */
+    @keyframes water-wave-1 {
       0% {
-        background-position: 0% 0%;
+        background-position: 0% 50%, 100% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%, 0% 50%;
       }
 
       100% {
-        background-position: 200% 200%;
+        background-position: 0% 50%, 100% 50%;
       }
     }
 
-    @keyframes wave-net-2 {
+    @keyframes water-wave-2 {
       0% {
-        background-position: 100% 0%;
+        background-position: 50% 0%, 50% 100%;
+      }
+
+      50% {
+        background-position: 50% 100%, 50% 0%;
       }
 
       100% {
-        background-position: -100% 200%;
+        background-position: 50% 0%, 50% 100%;
       }
     }
 
@@ -300,47 +308,61 @@
         0 0 8px -2px rgba(var(--glow-default), 0.15);
     }
 
-    /* Wave Net Layer 1 - Diagonal lines (45deg) */
+    /* Water Wave Layer 1 - Curved radial ripples */
     .neon-card-default::before {
       content: '';
       position: absolute;
-      inset: 0;
-      background: repeating-linear-gradient(45deg,
-          transparent 0px,
-          transparent 8px,
-          rgba(var(--glow-hover), 0.08) 8px,
-          rgba(var(--glow-hover), 0.2) 10px,
-          rgba(var(--glow-hover), 0.08) 12px,
-          transparent 12px,
-          transparent 20px);
-      background-size: 200% 200%;
+      inset: -50%;
+      width: 200%;
+      height: 200%;
+      background:
+        radial-gradient(ellipse 100% 50% at 0% 50%,
+          transparent 45%,
+          rgba(var(--glow-hover), 0.04) 47%,
+          rgba(var(--glow-hover), 0.08) 49%,
+          rgba(var(--glow-hover), 0.04) 51%,
+          transparent 53%),
+        radial-gradient(ellipse 100% 50% at 100% 50%,
+          transparent 45%,
+          rgba(var(--glow-hover), 0.04) 47%,
+          rgba(var(--glow-hover), 0.08) 49%,
+          rgba(var(--glow-hover), 0.04) 51%,
+          transparent 53%);
+      background-size: 50% 100%, 50% 100%;
       opacity: 0;
-      transition: opacity 0.3s ease;
+      transition: opacity 0.4s ease;
       pointer-events: none;
-      z-index: 1;
+      z-index: -1;
     }
 
-    /* Wave Net Layer 2 - Counter-diagonal lines (-45deg / 135deg) */
+    /* Water Wave Layer 2 - Counter-flowing ripples */
     .neon-card-default::after {
       content: '';
       position: absolute;
-      inset: 0;
-      background: repeating-linear-gradient(-45deg,
-          transparent 0px,
-          transparent 8px,
-          rgba(var(--glow-hover), 0.08) 8px,
-          rgba(var(--glow-hover), 0.2) 10px,
-          rgba(var(--glow-hover), 0.08) 12px,
-          transparent 12px,
-          transparent 20px);
-      background-size: 200% 200%;
+      inset: -50%;
+      width: 200%;
+      height: 200%;
+      background:
+        radial-gradient(ellipse 50% 100% at 50% 0%,
+          transparent 45%,
+          rgba(var(--glow-hover), 0.03) 47%,
+          rgba(var(--glow-hover), 0.06) 49%,
+          rgba(var(--glow-hover), 0.03) 51%,
+          transparent 53%),
+        radial-gradient(ellipse 50% 100% at 50% 100%,
+          transparent 45%,
+          rgba(var(--glow-hover), 0.03) 47%,
+          rgba(var(--glow-hover), 0.06) 49%,
+          rgba(var(--glow-hover), 0.03) 51%,
+          transparent 53%);
+      background-size: 100% 50%, 100% 50%;
       opacity: 0;
-      transition: opacity 0.3s ease;
+      transition: opacity 0.4s ease;
       pointer-events: none;
-      z-index: 2;
+      z-index: -1;
     }
 
-    /* State 2: Hover & Touch (Interaction) - Purple Multi-directional Wave Net */
+    /* State 2: Hover & Touch (Interaction) - Purple Water Waves */
     .neon-card-default:hover,
     .neon-card-default:active {
       border-color: rgba(var(--glow-hover), 0.9);
@@ -355,13 +377,13 @@
     .neon-card-default:hover::before,
     .neon-card-default:active::before {
       opacity: 1;
-      animation: wave-net-1 3s linear infinite;
+      animation: water-wave-1 4s ease-in-out infinite;
     }
 
     .neon-card-default:hover::after,
     .neon-card-default:active::after {
       opacity: 1;
-      animation: wave-net-2 2.5s linear infinite;
+      animation: water-wave-2 5s ease-in-out infinite;
     }
 
     /* State 3: Expanded (Active) - Golden */
@@ -372,7 +394,7 @@
         inset 0 0 25px -12px rgba(var(--glow-expanded), 0.15);
     }
 
-    /* Hide wave net on expanded state */
+    /* Hide water waves on expanded state */
     .neon-card-expanded::before,
     .neon-card-expanded::after {
       display: none;
@@ -385,11 +407,10 @@
         0 0 20px -2px rgba(var(--glow-transition), 0.5) !important;
     }
 
-    /* Ensure readability inside cards - content stays above wave net */
-    .neon-card .card-content,
-    .neon-card>div {
+    /* Ensure readability - card content ALWAYS above waves */
+    .neon-card>* {
       position: relative;
-      z-index: 10;
+      z-index: 1;
     }
 
     /* Particle Background */
