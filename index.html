@@ -269,6 +269,18 @@
     .neon-card {
       transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
+      overflow: hidden;
+    }
+
+    /* Wave animation keyframes */
+    @keyframes glow-wave {
+      0% {
+        transform: translateX(-100%) rotate(45deg);
+      }
+
+      100% {
+        transform: translateX(200%) rotate(45deg);
+      }
     }
 
     /* State 1: Default (Idle) - Blue Aura */
@@ -278,13 +290,45 @@
         0 0 8px -2px rgba(var(--glow-default), 0.15);
     }
 
-    /* State 2: Hover & Touch (Interaction) - Purple */
+    /* Pseudo-element for wave effect */
+    .neon-card-default::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg,
+          transparent 0%,
+          transparent 40%,
+          rgba(var(--glow-hover), 0.15) 45%,
+          rgba(var(--glow-hover), 0.35) 50%,
+          rgba(var(--glow-hover), 0.15) 55%,
+          transparent 60%,
+          transparent 100%);
+      transform: translateX(-100%) rotate(45deg);
+      transition: opacity 0.3s ease;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* State 2: Hover & Touch (Interaction) - Purple Super Glow Wave */
     .neon-card-default:hover,
     .neon-card-default:active {
-      border-color: rgba(var(--glow-hover), 0.7);
+      border-color: rgba(var(--glow-hover), 0.8);
       transform: translateY(-4px);
-      box-shadow: 0 0 30px -5px rgba(var(--glow-hover), 0.5),
-        0 0 12px -2px rgba(var(--glow-hover), 0.35);
+      box-shadow:
+        0 0 50px -5px rgba(var(--glow-hover), 0.6),
+        0 0 25px -2px rgba(var(--glow-hover), 0.5),
+        0 0 80px -10px rgba(var(--glow-hover), 0.4),
+        inset 0 0 30px -15px rgba(var(--glow-hover), 0.2);
+    }
+
+    .neon-card-default:hover::before,
+    .neon-card-default:active::before {
+      opacity: 1;
+      animation: glow-wave 1.5s ease-in-out infinite;
     }
 
     /* State 3: Expanded (Active) - Golden */
@@ -295,6 +339,11 @@
         inset 0 0 25px -12px rgba(var(--glow-expanded), 0.15);
     }
 
+    /* Hide wave on expanded state */
+    .neon-card-expanded::before {
+      display: none;
+    }
+
     /* State 4: Transitioning (Animation) - Orange */
     .neon-card.is-animating {
       border-color: rgba(var(--glow-transition), 0.9) !important;
@@ -302,8 +351,9 @@
         0 0 20px -2px rgba(var(--glow-transition), 0.5) !important;
     }
 
-    /* Ensure readability inside cards */
-    .neon-card .card-content {
+    /* Ensure readability inside cards - content stays above wave */
+    .neon-card .card-content,
+    .neon-card>div {
       position: relative;
       z-index: 10;
     }
