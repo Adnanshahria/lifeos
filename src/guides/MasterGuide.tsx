@@ -2,7 +2,7 @@ import React from 'react';
 
 const MasterGuide: React.FC = () => {
   return (
-    <div className="w-full max-w-6xl mx-auto px-4 py-8 animate-fade-in text-slate-300 font-sans">
+    <div className="w-full max-w-6xl mx-auto px-4 pt-20 md:pt-8 py-8 animate-fade-in text-slate-300 font-sans pb-24 md:pb-8">
       <div className="text-center mb-16">
         <h2 className="text-4xl md:text-6xl font-serif font-bold text-white mb-6">ইউনিফাইড ফ্রেমওয়ার্ক</h2>
         <p className="text-xl text-slate-400 max-w-3xl mx-auto">
@@ -89,14 +89,14 @@ const MasterGuide: React.FC = () => {
       <div className="bg-gradient-to-br from-dark-800 to-dark-900 rounded-3xl p-10 border border-slate-700 shadow-2xl">
         <h3 className="text-3xl font-serif font-bold text-white mb-8 text-center">৩০ দিনের এক্সিকিউশন প্ল্যান</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          
+
           <div className="p-6 bg-dark-700/50 rounded-2xl border border-slate-600/30">
             <div className="text-3xl font-bold text-slate-500 mb-2">১ম সপ্তাহ</div>
             <h4 className="text-xl font-bold text-white mb-3">ফাউন্ডেশন ও ডিটক্স</h4>
             <p className="text-sm text-slate-300 leading-relaxed">
-              - ডোপামিন বেসলাইন রিসেট।<br/>
-              - ফোন থেকে সোশ্যাল অ্যাপ ডিলিট।<br/>
-              - ঘুমের রুটিন ঠিক করা (১০টা-৪টা)।<br/>
+              - ডোপামিন বেসলাইন রিসেট।<br />
+              - ফোন থেকে সোশ্যাল অ্যাপ ডিলিট।<br />
+              - ঘুমের রুটিন ঠিক করা (১০টা-৪টা)।<br />
               - ওযু/ঠান্ডা পানির অভ্যাস গঠন।
             </p>
           </div>
@@ -105,9 +105,9 @@ const MasterGuide: React.FC = () => {
             <div className="text-3xl font-bold text-slate-500 mb-2">২য় সপ্তাহ</div>
             <h4 className="text-xl font-bold text-white mb-3">হ্যাবিট ইনস্টলেশন</h4>
             <p className="text-sm text-slate-300 leading-relaxed">
-              - ৯০ মিনিটের ডিপ ওয়ার্ক ব্লক শুরু।<br/>
-              - হ্যাবিট স্ট্যাকিং প্রয়োগ।<br/>
-              - ওয়ার্কস্পেস গুছিয়ে রাখা।<br/>
+              - ৯০ মিনিটের ডিপ ওয়ার্ক ব্লক শুরু।<br />
+              - হ্যাবিট স্ট্যাকিং প্রয়োগ।<br />
+              - ওয়ার্কস্পেস গুছিয়ে রাখা।<br />
               - কাজের সময় ফোন অন্য ঘরে রাখা।
             </p>
           </div>
@@ -116,9 +116,9 @@ const MasterGuide: React.FC = () => {
             <div className="text-3xl font-bold text-slate-500 mb-2">৩য় সপ্তাহ</div>
             <h4 className="text-xl font-bold text-white mb-3">অপ্টিমাইজেশন</h4>
             <p className="text-sm text-slate-300 leading-relaxed">
-              - কাইলুলাহ (ন্যাপ) যুক্ত করা।<br/>
-              - দিনে ৩টি ডিপ ওয়ার্ক ব্লক।<br/>
-              - নেগেটিভ ভিজ্যুয়ালাইজেশন চর্চা।<br/>
+              - কাইলুলাহ (ন্যাপ) যুক্ত করা।<br />
+              - দিনে ৩টি ডিপ ওয়ার্ক ব্লক।<br />
+              - নেগেটিভ ভিজ্যুয়ালাইজেশন চর্চা।<br />
               - অগ্রগতির লক্ষণগুলো যাচাই করা।
             </p>
           </div>
@@ -127,9 +127,9 @@ const MasterGuide: React.FC = () => {
             <div className="text-3xl font-bold text-slate-500 mb-2">৪র্থ সপ্তাহ</div>
             <h4 className="text-xl font-bold text-white mb-3">ফুল থ্রোটল</h4>
             <p className="text-sm text-slate-300 leading-relaxed">
-              - সম্পূর্ণ সিস্টেম রান করা।<br/>
-              - KPI ট্র্যাক করা (কাজের ঘণ্টা)।<br/>
-              - ডায়েট ও এক্সারসাইজ প্ল্যান।<br/>
+              - সম্পূর্ণ সিস্টেম রান করা।<br />
+              - KPI ট্র্যাক করা (কাজের ঘণ্টা)।<br />
+              - ডায়েট ও এক্সারসাইজ প্ল্যান।<br />
               - সাপ্তাহিক রিভিউ ও অ্যাডজাস্টমেন্ট।
             </p>
           </div>
