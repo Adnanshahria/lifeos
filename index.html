@@ -302,18 +302,50 @@
 </head>
 
 <body class="bg-[#050505] text-slate-200 antialiased selection:bg-blue-500/30 selection:text-blue-100 font-sans">
-  <div id="root"></div>
+  <div id="root">
+    <!-- Loading indicator while React loads -->
+    <div id="loading"
+      style="display: flex; justify-content: center; align-items: center; min-height: 100vh; flex-direction: column;">
+      <div
+        style="width: 50px; height: 50px; border: 3px solid #333; border-top-color: #3b82f6; border-radius: 50%; animation: spin 1s linear infinite;">
+      </div>
+      <p style="margin-top: 20px; color: #64748b; font-size: 14px;">Loading Life OS...</p>
+    </div>
+    <style>
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </div>
+
+  <noscript>
+    <div style="padding: 40px; text-align: center; color: #94a3b8;">
+      <h1 style="color: white; margin-bottom: 20px;">Life Operating System</h1>
+      <p>JavaScript is required to run this application.</p>
+    </div>
+  </noscript>
+
   <script type="module" src="./src/main.tsx"></script>
+
+  <!-- Error handling for mobile -->
+  <script>
+    window.onerror = function (msg, url, line, col, error) {
+      console.error('Error:', msg, url, line);
+      return false;
+    };
+  </script>
 
   <!-- Service Worker Registration -->
   <script>
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
+      window.addEventListener('load', function () {
         navigator.serviceWorker.register('sw.js')
-          .then(registration => {
+          .then(function (registration) {
             console.log('SW registered:', registration.scope);
           })
-          .catch(error => {
+          .catch(function (error) {
             console.log('SW registration failed:', error);
           });
       });
