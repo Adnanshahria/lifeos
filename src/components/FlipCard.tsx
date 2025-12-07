@@ -8,6 +8,7 @@ interface FlipCardProps {
 const FlipCard: React.FC<FlipCardProps> = ({ data }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [isTouching, setIsTouching] = useState(false);
   const [pullProgress, setPullProgress] = useState(0);
   const [isPulling, setIsPulling] = useState(false);
 
@@ -25,6 +26,7 @@ const FlipCard: React.FC<FlipCardProps> = ({ data }) => {
     touchStartX.current = touch.clientX;
     isScrollingHorizontally.current = false;
     setIsPulling(true);
+    setIsTouching(true);
   }, []);
 
   const handleTouchMove = useCallback((e: React.TouchEvent) => {
@@ -75,6 +77,7 @@ const FlipCard: React.FC<FlipCardProps> = ({ data }) => {
 
     setPullProgress(0);
     setIsPulling(false);
+    setIsTouching(false);
   }, [isPulling, pullProgress, isExpanded]);
 
   const handleClick = () => {
@@ -112,6 +115,7 @@ const FlipCard: React.FC<FlipCardProps> = ({ data }) => {
       <div
         className={`neon-card relative w-full rounded-2xl bg-[#0a0a0a] p-4 md:p-6 overflow-hidden
           ${isAnimating ? 'is-animating' : ''}
+          ${isTouching && !isExpanded ? 'is-touching' : ''}
           ${isExpanded ? 'neon-card-expanded' : 'neon-card-default'}`}
       >
         {/* Animated Gradient Background - Subtle texture */}
