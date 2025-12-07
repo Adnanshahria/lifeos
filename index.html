@@ -274,14 +274,21 @@
         display: none !important;
       }
 
-      /* Add safe area padding when header is hidden so content isn't behind status bar */
-      main {
-        padding-top: max(20px, env(safe-area-inset-top)) !important;
+      /* Disable scroll-snap in PWA mode to prevent headers from snapping out of view */
+      .snap-container {
+        scroll-snap-type: none !important;
+        height: auto !important;
+        overflow-y: visible !important;
+        padding-top: max(80px, calc(env(safe-area-inset-top) + 60px)) !important;
       }
 
-      /* Ensure section headers have proper spacing from top */
-      .snap-container {
-        padding-top: max(60px, calc(env(safe-area-inset-top) + 40px)) !important;
+      .snap-item {
+        scroll-snap-align: none !important;
+      }
+
+      /* Add safe area padding when header is hidden */
+      main {
+        padding-top: max(20px, env(safe-area-inset-top)) !important;
       }
     }
   </style>

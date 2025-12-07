@@ -16,7 +16,7 @@ const Navigation: React.FC<NavigationProps> = ({ activeTab, setActiveTab }) => {
     { id: Tab.DEEP_WORK, label: 'ডিপ ওয়ার্ক', icon: '🎯' },
     { id: Tab.DOPAMINE_DETOX, label: 'ডোপামিন', icon: '🧠' },
     { id: Tab.DAILY_STOIC, label: 'স্টোয়িসিজম', icon: '🏛️' },
-    { id: Tab.DEEP_FOCUS_PROTOCOL, label: 'ডিপ ফোকাস', icon: '👁️' },
+    { id: Tab.DEEP_FOCUS_PROTOCOL, label: 'ডিপ ফোকাস', icon: '🔍' },
     { id: Tab.MASTER_GUIDE, label: 'মাস্টার গাইড', icon: '📚' },
   ];
 
