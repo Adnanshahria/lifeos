@@ -1,3 +1,17 @@
+{
+    "name": "Life Operating System",
+    "short_name": "Life OS",
+    "description": "A comprehensive lifestyle framework synthesizing Atomic Habits, Deep Work, Stoicism, and Neuroscience-backed protocols.",
+    "start_url": "/lifeos/",
+    "scope": "/lifeos/",
+    "display": "standalone",
+    "background_color": "#000000",
+    "theme_color": "#000000",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "icon-192.png",
+            "sizes": "192x192",
             "type": "image/png",
             "purpose": "any maskable"
         },
