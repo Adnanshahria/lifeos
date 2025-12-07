@@ -245,10 +245,49 @@
         transform: translateY(-8px);
         box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
       }
+    }
 
-      .hover-glow:hover {
-        box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
-      }
+    /* NEON CARD STYLES */
+    .neon-card {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+    }
+
+    /* State 1: Default (Idle) - Cyan/Sky Blue Aura */
+    .neon-card-default {
+      border: 1px solid rgba(6, 182, 212, 0.3);
+      /* cyan-500 optimized opacity */
+      box-shadow: 0 0 15px -3px rgba(6, 182, 212, 0.15),
+        0 0 5px -2px rgba(6, 182, 212, 0.1);
+    }
+
+    /* State 2: Hover (Interaction) - Fire/Orange/Gold */
+    .neon-card-default:hover {
+      border-color: rgba(245, 158, 11, 0.6);
+      /* amber-500 */
+      transform: translateY(-4px);
+      box-shadow: 0 0 25px -5px rgba(245, 158, 11, 0.4),
+        /* Primary Fire Glow */
+        0 0 10px -2px rgba(239, 68, 68, 0.3);
+      /* Red undertone */
+    }
+
+    /* State 3: Expanded (Active) - Deep Violet/Purple */
+    .neon-card-expanded {
+      border-color: rgba(139, 92, 246, 0.8);
+      /* violet-500 */
+      box-shadow: 0 0 40px -5px rgba(139, 92, 246, 0.5),
+        /* Main Purple Aura */
+        0 0 15px -2px rgba(167, 139, 250, 0.4),
+        /* Lighter violet inner */
+        inset 0 0 20px -10px rgba(139, 92, 246, 0.2);
+      /* Subtle inner glow */
+    }
+
+    /* ensure readability inside cards */
+    .neon-card .card-content {
+      position: relative;
+      z-index: 10;
     }
 
     /* Particle Background */

@@ -98,14 +98,18 @@ const FlipCard: React.FC<FlipCardProps> = ({ data }) => {
       }}
     >
       <div
-        className={`relative w-full rounded-2xl bg-gradient-to-br from-[#0f0f0f] to-[#0a0a0a] border border-white/5 p-4 md:p-6 overflow-hidden transition-all duration-500 ease-out
-          ${isExpanded ? 'border-blue-500/40 shadow-[0_0_50px_-15px_rgba(59,130,246,0.3)]' : 'lg:hover:border-blue-500/40 lg:hover:-translate-y-2 lg:hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)]'}`}
+        className={`neon-card relative w-full rounded-2xl bg-[#0a0a0a] p-4 md:p-6 overflow-hidden
+          ${isExpanded ? 'neon-card-expanded' : 'neon-card-default'}`}
       >
-        {/* Animated Gradient Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 via-transparent to-purple-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+        {/* Animated Gradient Background - Subtle texture */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/10 via-transparent to-purple-900/10 opacity-30 pointer-events-none"></div>
 
         {/* Neon Top Line */}
-        <div className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-blue-500 to-transparent transition-all duration-500 shadow-[0_0_20px_rgba(59,130,246,1)] ${isExpanded ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}></div>
+        <div className={`absolute top-0 left-0 right-0 h-[2px] transition-all duration-500
+          ${isExpanded
+            ? 'bg-gradient-to-r from-transparent via-purple-500 to-transparent shadow-[0_0_20px_rgba(139,92,246,1)] opacity-100'
+            : 'bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-0 group-hover:opacity-100'}`}
+        ></div>
 
         {/* Lightning Icon */}
         <div className="absolute top-3 right-3 md:top-5 md:right-5 text-slate-700 group-hover:text-blue-400 transition-colors duration-300">
@@ -116,22 +120,21 @@ const FlipCard: React.FC<FlipCardProps> = ({ data }) => {
 
         {/* Main Content - Always Visible */}
         <div className="flex flex-col items-center text-center z-10 relative">
-          <h3 className={`text-base md:text-xl font-bold text-slate-100 mb-2 md:mb-4 font-serif leading-tight transition-all ${isExpanded ? 'text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-indigo-200' : ''}`}>
+          <h3 className={`text-base md:text-xl font-bold text-slate-100 mb-2 md:mb-4 font-serif leading-tight transition-all relative z-10 ${isExpanded ? 'text-transparent bg-clip-text bg-gradient-to-r from-purple-200 to-violet-200' : ''}`}>
             {data.title}
           </h3>
-          <div className={`h-1 rounded-full mb-2 md:mb-4 transition-all duration-500 ${isExpanded ? 'w-16 bg-gradient-to-r from-blue-500 to-indigo-500' : 'w-8 md:w-12 bg-slate-800'}`}></div>
+          <div className={`h-1 rounded-full mb-2 md:mb-4 transition-all duration-500 relative z-10 ${isExpanded ? 'w-16 bg-gradient-to-r from-purple-500 to-violet-500' : 'w-8 md:w-12 bg-slate-800'}`}></div>
           <p className="text-slate-400 font-medium text-xs md:text-sm leading-relaxed font-sans line-clamp-3 md:line-clamp-none px-1 md:px-2">
             {data.frontSummary}
           </p>
         </div>
 
-        {/* Tags */}
         <div className="flex flex-wrap gap-1 md:gap-1.5 mt-4 pt-3 justify-center z-10 relative w-full">
           {data.tags?.slice(0, 3).map(tag => (
             <span key={tag} className={`text-[8px] md:text-[10px] uppercase tracking-wider px-2 md:px-2.5 py-0.5 rounded-full border transition-all duration-300
               ${isExpanded
-                ? 'border-blue-400/70 text-blue-200 bg-blue-500/15 shadow-[0_0_15px_rgba(59,130,246,0.5)]'
-                : 'border-blue-500/50 text-blue-300 bg-blue-500/10 shadow-[0_0_10px_rgba(59,130,246,0.3)]'}`}>
+                ? 'border-purple-400/70 text-purple-200 bg-purple-500/15 shadow-[0_0_15px_rgba(139,92,246,0.5)]'
+                : 'border-cyan-500/50 text-cyan-300 bg-cyan-500/10 shadow-[0_0_10px_rgba(6,182,212,0.3)]'}`}>
               {tag}
             </span>
           ))}
@@ -139,10 +142,10 @@ const FlipCard: React.FC<FlipCardProps> = ({ data }) => {
 
         {/* Pull Indicator with Rotating Arrow */}
         <div className="text-[8px] md:text-[9px] text-slate-600 mt-3 md:mt-4 uppercase tracking-[0.15em] md:tracking-[0.2em] font-bold transition-colors flex items-center justify-center gap-1 md:gap-1.5">
-          <span className={isExpanded ? 'text-blue-400' : ''}>{isExpanded ? 'সংক্ষিপ্ত' : 'বিস্তারিত'}</span>
+          <span className={isExpanded ? 'text-purple-400' : ''}>{isExpanded ? 'সংক্ষিপ্ত' : 'বিস্তারিত'}</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className={`h-2.5 w-2.5 md:h-3 md:w-3 transition-transform duration-500 ease-out ${isExpanded ? 'rotate-180 text-blue-400' : 'animate-bounce'}`}
+            className={`h-2.5 w-2.5 md:h-3 md:w-3 transition-transform duration-500 ease-out ${isExpanded ? 'rotate-180 text-purple-400' : 'animate-bounce group-hover:text-cyan-400'}`}
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -151,15 +154,14 @@ const FlipCard: React.FC<FlipCardProps> = ({ data }) => {
           </svg>
         </div>
 
-        {/* Expandable Description Section */}
         <div
           className={`overflow-hidden transition-all duration-500 ease-out ${isExpanded ? 'max-h-[500px] opacity-100 mt-4' : 'max-h-0 opacity-0 mt-0'}`}
           style={{
             transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)', // Spring-like easing
           }}
         >
-          <div className="pt-4 border-t border-blue-500/30">
-            <h4 className="text-[10px] md:text-xs font-bold text-blue-400 mb-2 md:mb-3 uppercase tracking-widest flex items-center gap-2">
+          <div className="pt-4 border-t border-purple-500/30">
+            <h4 className="text-[10px] md:text-xs font-bold text-purple-400 mb-2 md:mb-3 uppercase tracking-widest flex items-center gap-2">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
                 <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
                 <path fillRule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd" />
