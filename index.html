@@ -128,6 +128,13 @@
     body {
       background-color: #050505;
       overflow-x: hidden;
+      overscroll-behavior-y: none;
+      /* Disable pull-to-refresh / rubber band effect */
+    }
+
+    html {
+      overscroll-behavior-y: none;
+      /* Ensure it applies to the root element too */
     }
 
     /* Mobile Bottom Navigation */
