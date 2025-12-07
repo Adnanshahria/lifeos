@@ -9,8 +9,7 @@ interface SectionProps {
 const Section: React.FC<SectionProps> = ({ data }) => {
   return (
     <div className="w-full max-w-7xl mx-auto px-3 md:px-4 py-8 md:py-12 animate-fade-in pb-24 md:pb-32 snap-container">
-      {/* Hero section - hidden on mobile */}
-      <div className="hidden md:block mb-12 md:mb-20 text-center relative">
+      <div className="mb-12 md:mb-20 text-center relative">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 md:w-32 h-48 md:h-32 bg-gradient-to-r from-blue-500/20 to-purple-500/20 blur-[80px] md:blur-[100px] rounded-full pointer-events-none"></div>
         <h2 className="text-3xl md:text-7xl font-serif font-bold text-white mb-4 md:mb-6 tracking-tight drop-shadow-2xl relative z-10 leading-tight">
           {data.title}
