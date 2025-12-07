@@ -56,7 +56,7 @@ const App: React.FC = () => {
       return <MasterGuide />;
     }
 
-    return <Section data={APP_DATA[activeTab]} />;
+    return <Section data={APP_DATA[activeTab]} hideSerialNumber={activeTab === Tab.LIFE_PROTOCOL} />;
   };
 
   return (

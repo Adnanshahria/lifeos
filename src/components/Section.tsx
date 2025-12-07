@@ -4,9 +4,10 @@ import FlipCard from './FlipCard';
 
 interface SectionProps {
   data: SectionData;
+  hideSerialNumber?: boolean;
 }
 
-const Section: React.FC<SectionProps> = ({ data }) => {
+const Section: React.FC<SectionProps> = ({ data, hideSerialNumber }) => {
   return (
     <div className="w-full max-w-7xl mx-auto px-3 md:px-4 pt-20 md:pt-8 py-8 md:py-12 animate-fade-in pb-24 md:pb-32 snap-container">
       <div className="mb-12 md:mb-20 text-center relative">
@@ -35,7 +36,7 @@ const Section: React.FC<SectionProps> = ({ data }) => {
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 lg:gap-10">
                 {group.cards.map((card, cardIndex) => (
-                  <FlipCard key={card.id} data={card} serialNumber={cardIndex + 1} />
+                  <FlipCard key={card.id} data={card} serialNumber={cardIndex + 1} hideSerialNumber={hideSerialNumber} />
                 ))}
               </div>
             </div>
@@ -44,7 +45,7 @@ const Section: React.FC<SectionProps> = ({ data }) => {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 lg:gap-10">
           {data.cards.map((card, cardIndex) => (
-            <FlipCard key={card.id} data={card} serialNumber={cardIndex + 1} />
+            <FlipCard key={card.id} data={card} serialNumber={cardIndex + 1} hideSerialNumber={hideSerialNumber} />
           ))}
         </div>
       )}

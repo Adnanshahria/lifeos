@@ -4,9 +4,10 @@ import { CardData } from '../types';
 interface FlipCardProps {
   data: CardData;
   serialNumber?: number;
+  hideSerialNumber?: boolean;
 }
 
-const FlipCard: React.FC<FlipCardProps> = ({ data, serialNumber }) => {
+const FlipCard: React.FC<FlipCardProps> = ({ data, serialNumber, hideSerialNumber }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const [isTouching, setIsTouching] = useState(false);
@@ -122,13 +123,6 @@ const FlipCard: React.FC<FlipCardProps> = ({ data, serialNumber }) => {
         {/* Animated Gradient Background - Subtle texture */}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-900/10 via-transparent to-purple-900/10 opacity-30 pointer-events-none"></div>
 
-        {/* Serial Number Watermark */}
-        {serialNumber !== undefined && (
-          <div className="absolute top-2 left-3 md:top-4 md:left-5 text-4xl md:text-5xl font-bold text-white/10 pointer-events-none select-none font-serif z-0">
-            {String(serialNumber).padStart(2, '0')}
-          </div>
-        )}
-
         {/* Neon Top Line */}
         <div className={`absolute top-0 left-0 right-0 h-[2px] transition-all duration-500
           ${isExpanded
@@ -136,12 +130,14 @@ const FlipCard: React.FC<FlipCardProps> = ({ data, serialNumber }) => {
             : 'bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-50'}`}
         ></div>
 
-        {/* Lightning Icon */}
-        <div className="absolute top-3 right-3 md:top-5 md:right-5 text-slate-700 group-hover:text-blue-400 transition-colors duration-300">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 md:h-5 md:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
-          </svg>
-        </div>
+        {/* Serial Number Circle - Hidden on 12 Laws page */}
+        {serialNumber !== undefined && !hideSerialNumber && (
+          <div className="absolute top-3 right-3 md:top-4 md:right-4 w-7 h-7 md:w-9 md:h-9 rounded-full flex items-center justify-center border border-blue-500/60 bg-blue-500/10 shadow-[0_0_15px_rgba(59,130,246,0.4)] transition-all duration-300 z-20">
+            <span className="text-xs md:text-sm font-bold text-blue-300 font-sans">
+              {String(serialNumber).padStart(2, '0')}
+            </span>
+          </div>
+        )}
 
         {/* Main Content - Always Visible */}
         <div className="flex flex-col items-center text-center z-10 relative">
