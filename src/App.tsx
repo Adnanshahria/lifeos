@@ -66,7 +66,7 @@ const App: React.FC = () => {
 
       <Navigation activeTab={activeTab} setActiveTab={setActiveTab} />
 
-      <main className="container mx-auto pb-12 relative z-0">
+      <main className="container mx-auto pt-16 lg:pt-0 pb-12 relative z-0">
         {renderContent()}
       </main>
 
