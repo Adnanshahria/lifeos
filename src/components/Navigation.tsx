@@ -20,15 +20,6 @@ const Navigation: React.FC<NavigationProps> = ({ activeTab, setActiveTab }) => {
     { id: Tab.MASTER_GUIDE, label: 'মাস্টার গাইড', icon: '📚' },
   ];
 
-  // Key tabs for bottom nav (mobile)
-  const bottomNavTabs = [
-    { id: Tab.HOME, label: 'হোম', icon: '🏠' },
-    { id: Tab.LIFE_PROTOCOL, label: 'সূত্র', icon: '📜' },
-    { id: Tab.ATOMIC_HABITS, label: 'হ্যাবিটস', icon: '⚛️' },
-    { id: Tab.DEEP_WORK, label: 'ডিপ ওয়ার্ক', icon: '🎯' },
-    { id: Tab.MASTER_GUIDE, label: 'গাইড', icon: '📚' },
-  ];
-
   const handleTabClick = (tabId: Tab) => {
     setActiveTab(tabId);
     setIsOpen(false);
@@ -55,8 +46,8 @@ const Navigation: React.FC<NavigationProps> = ({ activeTab, setActiveTab }) => {
                     key={tab.id}
                     onClick={() => handleTabClick(tab.id)}
                     className={`px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wide transition-all duration-300 transform hover:scale-105 ${activeTab === tab.id
-                        ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-500/30 ring-2 ring-blue-400/50 animate-pulse-glow'
-                        : 'text-slate-400 hover:bg-slate-800/50 hover:text-white border border-transparent hover:border-slate-700'
+                      ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-500/30 ring-2 ring-blue-400/50 animate-pulse-glow'
+                      : 'text-slate-400 hover:bg-slate-800/50 hover:text-white border border-transparent hover:border-slate-700'
                       }`}
                   >
                     <span className="mr-1.5">{tab.icon}</span>
@@ -92,8 +83,8 @@ const Navigation: React.FC<NavigationProps> = ({ activeTab, setActiveTab }) => {
                 key={tab.id}
                 onClick={() => handleTabClick(tab.id)}
                 className={`flex items-center w-full text-left px-4 py-3.5 rounded-xl text-base font-medium transition-all touch-feedback ${activeTab === tab.id
-                    ? 'bg-gradient-to-r from-blue-600/20 to-indigo-600/20 text-blue-400 border border-blue-500/30 shadow-lg shadow-blue-900/20'
-                    : 'text-slate-300 hover:bg-slate-700/50 hover:text-white border border-transparent'
+                  ? 'bg-gradient-to-r from-blue-600/20 to-indigo-600/20 text-blue-400 border border-blue-500/30 shadow-lg shadow-blue-900/20'
+                  : 'text-slate-300 hover:bg-slate-700/50 hover:text-white border border-transparent'
                   }`}
               >
                 <span className="text-xl mr-3">{tab.icon}</span>
@@ -104,17 +95,29 @@ const Navigation: React.FC<NavigationProps> = ({ activeTab, setActiveTab }) => {
         </div>
       </nav>
 
-      {/* Mobile Bottom Navigation */}
+      {/* Mobile Bottom Navigation - Horizontal Scrollable */}
       <div className="lg:hidden bottom-nav">
-        <div className="flex justify-around items-center">
-          {bottomNavTabs.map((tab) => (
+        <div
+          className="flex overflow-x-auto whitespace-nowrap px-2 gap-1"
+          style={{
+            scrollbarWidth: 'none', // Firefox
+            msOverflowStyle: 'none', // IE/Edge
+          }}
+        >
+          <style>{`
+            .bottom-nav div::-webkit-scrollbar {
+              display: none;
+            }
+          `}</style>
+          {tabs.map((tab) => (
             <button
               key={tab.id}
               onClick={() => handleTabClick(tab.id)}
-              className={`bottom-nav-item touch-feedback ${activeTab === tab.id ? 'active' : ''}`}
+              className={`bottom-nav-item touch-feedback flex-shrink-0 ${activeTab === tab.id ? 'active' : ''}`}
+              style={{ minWidth: '70px' }}
             >
               <span className="text-xl mb-1">{tab.icon}</span>
-              <span className="text-[10px] font-medium truncate max-w-[50px]">{tab.label}</span>
+              <span className="text-[9px] font-medium whitespace-nowrap">{tab.label}</span>
             </button>
           ))}
         </div>
