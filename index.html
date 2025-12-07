@@ -272,14 +272,24 @@
       overflow: hidden;
     }
 
-    /* Wave animation keyframes */
-    @keyframes glow-wave {
+    /* Wave Net animation keyframes - Two directions */
+    @keyframes wave-net-1 {
       0% {
-        transform: translateX(-100%) rotate(45deg);
+        background-position: 0% 0%;
       }
 
       100% {
-        transform: translateX(200%) rotate(45deg);
+        background-position: 200% 200%;
+      }
+    }
+
+    @keyframes wave-net-2 {
+      0% {
+        background-position: 100% 0%;
+      }
+
+      100% {
+        background-position: -100% 200%;
       }
     }
 
@@ -290,45 +300,68 @@
         0 0 8px -2px rgba(var(--glow-default), 0.15);
     }
 
-    /* Pseudo-element for wave effect */
+    /* Wave Net Layer 1 - Diagonal lines (45deg) */
     .neon-card-default::before {
       content: '';
       position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(45deg,
-          transparent 0%,
-          transparent 40%,
-          rgba(var(--glow-hover), 0.15) 45%,
-          rgba(var(--glow-hover), 0.35) 50%,
-          rgba(var(--glow-hover), 0.15) 55%,
-          transparent 60%,
-          transparent 100%);
-      transform: translateX(-100%) rotate(45deg);
-      transition: opacity 0.3s ease;
+      inset: 0;
+      background: repeating-linear-gradient(45deg,
+          transparent 0px,
+          transparent 8px,
+          rgba(var(--glow-hover), 0.08) 8px,
+          rgba(var(--glow-hover), 0.2) 10px,
+          rgba(var(--glow-hover), 0.08) 12px,
+          transparent 12px,
+          transparent 20px);
+      background-size: 200% 200%;
       opacity: 0;
+      transition: opacity 0.3s ease;
       pointer-events: none;
       z-index: 1;
     }
 
-    /* State 2: Hover & Touch (Interaction) - Purple Super Glow Wave */
+    /* Wave Net Layer 2 - Counter-diagonal lines (-45deg / 135deg) */
+    .neon-card-default::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(-45deg,
+          transparent 0px,
+          transparent 8px,
+          rgba(var(--glow-hover), 0.08) 8px,
+          rgba(var(--glow-hover), 0.2) 10px,
+          rgba(var(--glow-hover), 0.08) 12px,
+          transparent 12px,
+          transparent 20px);
+      background-size: 200% 200%;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* State 2: Hover & Touch (Interaction) - Purple Multi-directional Wave Net */
     .neon-card-default:hover,
     .neon-card-default:active {
-      border-color: rgba(var(--glow-hover), 0.8);
+      border-color: rgba(var(--glow-hover), 0.9);
       transform: translateY(-4px);
       box-shadow:
-        0 0 50px -5px rgba(var(--glow-hover), 0.6),
-        0 0 25px -2px rgba(var(--glow-hover), 0.5),
-        0 0 80px -10px rgba(var(--glow-hover), 0.4),
-        inset 0 0 30px -15px rgba(var(--glow-hover), 0.2);
+        0 0 60px -5px rgba(var(--glow-hover), 0.7),
+        0 0 30px -2px rgba(var(--glow-hover), 0.6),
+        0 0 100px -10px rgba(var(--glow-hover), 0.5),
+        inset 0 0 40px -15px rgba(var(--glow-hover), 0.25);
     }
 
     .neon-card-default:hover::before,
     .neon-card-default:active::before {
       opacity: 1;
-      animation: glow-wave 1.5s ease-in-out infinite;
+      animation: wave-net-1 3s linear infinite;
+    }
+
+    .neon-card-default:hover::after,
+    .neon-card-default:active::after {
+      opacity: 1;
+      animation: wave-net-2 2.5s linear infinite;
     }
 
     /* State 3: Expanded (Active) - Golden */
@@ -339,8 +372,9 @@
         inset 0 0 25px -12px rgba(var(--glow-expanded), 0.15);
     }
 
-    /* Hide wave on expanded state */
-    .neon-card-expanded::before {
+    /* Hide wave net on expanded state */
+    .neon-card-expanded::before,
+    .neon-card-expanded::after {
       display: none;
     }
 
@@ -351,7 +385,7 @@
         0 0 20px -2px rgba(var(--glow-transition), 0.5) !important;
     }
 
-    /* Ensure readability inside cards - content stays above wave */
+    /* Ensure readability inside cards - content stays above wave net */
     .neon-card .card-content,
     .neon-card>div {
       position: relative;
