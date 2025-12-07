@@ -274,9 +274,14 @@
         display: none !important;
       }
 
-      /* Adjust main content padding when header is hidden */
+      /* Add safe area padding when header is hidden so content isn't behind status bar */
       main {
-        padding-top: 0 !important;
+        padding-top: max(20px, env(safe-area-inset-top)) !important;
+      }
+
+      /* Ensure section headers have proper spacing from top */
+      .snap-container {
+        padding-top: max(60px, calc(env(safe-area-inset-top) + 40px)) !important;
       }
     }
   </style>
