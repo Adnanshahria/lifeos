@@ -254,44 +254,55 @@
       }
     }
 
-    /* NEON CARD STYLES */
+    /* NEON CARD STYLES - Four-Stage Dynamic Color System */
+    :root {
+      --glow-default: 59, 130, 246;
+      /* Blue (RGB) */
+      --glow-hover: 168, 85, 247;
+      /* Purple (RGB) */
+      --glow-expanded: 234, 179, 8;
+      /* Golden (RGB) */
+      --glow-transition: 249, 115, 22;
+      /* Orange (RGB) */
+    }
+
     .neon-card {
       transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
     }
 
-    /* State 1: Default (Idle) - Cyan/Sky Blue Aura */
+    /* State 1: Default (Idle) - Blue Aura */
     .neon-card-default {
-      border: 1px solid rgba(6, 182, 212, 0.3);
-      /* cyan-500 optimized opacity */
-      box-shadow: 0 0 15px -3px rgba(6, 182, 212, 0.15),
-        0 0 5px -2px rgba(6, 182, 212, 0.1);
+      border: 1px solid rgba(var(--glow-default), 0.4);
+      box-shadow: 0 0 20px -3px rgba(var(--glow-default), 0.25),
+        0 0 8px -2px rgba(var(--glow-default), 0.15);
     }
 
-    /* State 2: Hover (Interaction) - Fire/Orange/Gold */
-    .neon-card-default:hover {
-      border-color: rgba(245, 158, 11, 0.6);
-      /* amber-500 */
+    /* State 2: Hover & Touch (Interaction) - Purple */
+    .neon-card-default:hover,
+    .neon-card-default:active {
+      border-color: rgba(var(--glow-hover), 0.7);
       transform: translateY(-4px);
-      box-shadow: 0 0 25px -5px rgba(245, 158, 11, 0.4),
-        /* Primary Fire Glow */
-        0 0 10px -2px rgba(239, 68, 68, 0.3);
-      /* Red undertone */
+      box-shadow: 0 0 30px -5px rgba(var(--glow-hover), 0.5),
+        0 0 12px -2px rgba(var(--glow-hover), 0.35);
     }
 
-    /* State 3: Expanded (Active) - Deep Violet/Purple */
+    /* State 3: Expanded (Active) - Golden */
     .neon-card-expanded {
-      border-color: rgba(139, 92, 246, 0.8);
-      /* violet-500 */
-      box-shadow: 0 0 40px -5px rgba(139, 92, 246, 0.5),
-        /* Main Purple Aura */
-        0 0 15px -2px rgba(167, 139, 250, 0.4),
-        /* Lighter violet inner */
-        inset 0 0 20px -10px rgba(139, 92, 246, 0.2);
-      /* Subtle inner glow */
+      border: 1px solid rgba(var(--glow-expanded), 0.7);
+      box-shadow: 0 0 35px -5px rgba(var(--glow-expanded), 0.5),
+        0 0 15px -2px rgba(var(--glow-expanded), 0.4),
+        inset 0 0 25px -12px rgba(var(--glow-expanded), 0.15);
     }
 
-    /* ensure readability inside cards */
+    /* State 4: Transitioning (Animation) - Orange */
+    .neon-card.is-animating {
+      border-color: rgba(var(--glow-transition), 0.9) !important;
+      box-shadow: 0 0 45px -5px rgba(var(--glow-transition), 0.6),
+        0 0 20px -2px rgba(var(--glow-transition), 0.5) !important;
+    }
+
+    /* Ensure readability inside cards */
     .neon-card .card-content {
       position: relative;
       z-index: 10;

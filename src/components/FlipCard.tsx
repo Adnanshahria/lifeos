@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { CardData } from '../types';
 
 interface FlipCardProps {
@@ -7,6 +7,7 @@ interface FlipCardProps {
 
 const FlipCard: React.FC<FlipCardProps> = ({ data }) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
   const [pullProgress, setPullProgress] = useState(0);
   const [isPulling, setIsPulling] = useState(false);
 
@@ -77,8 +78,19 @@ const FlipCard: React.FC<FlipCardProps> = ({ data }) => {
   }, [isPulling, pullProgress, isExpanded]);
 
   const handleClick = () => {
+    setIsAnimating(true);
     setIsExpanded(!isExpanded);
   };
+
+  // Clear animating state after transition completes (matches CSS transition duration)
+  useEffect(() => {
+    if (isAnimating) {
+      const timer = setTimeout(() => {
+        setIsAnimating(false);
+      }, 400); // Match the 0.4s CSS transition duration
+      return () => clearTimeout(timer);
+    }
+  }, [isAnimating]);
 
   // Calculate pull visual feedback
   const pullOffset = isPulling ? pullProgress * 30 : 0; // subtle visual feedback
@@ -99,6 +111,7 @@ const FlipCard: React.FC<FlipCardProps> = ({ data }) => {
     >
       <div
         className={`neon-card relative w-full rounded-2xl bg-[#0a0a0a] p-4 md:p-6 overflow-hidden
+          ${isAnimating ? 'is-animating' : ''}
           ${isExpanded ? 'neon-card-expanded' : 'neon-card-default'}`}
       >
         {/* Animated Gradient Background - Subtle texture */}
@@ -107,8 +120,8 @@ const FlipCard: React.FC<FlipCardProps> = ({ data }) => {
         {/* Neon Top Line */}
         <div className={`absolute top-0 left-0 right-0 h-[2px] transition-all duration-500
           ${isExpanded
-            ? 'bg-gradient-to-r from-transparent via-purple-500 to-transparent shadow-[0_0_20px_rgba(139,92,246,1)] opacity-100'
-            : 'bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-0 group-hover:opacity-100'}`}
+            ? 'bg-gradient-to-r from-transparent via-amber-400 to-transparent shadow-[0_0_20px_rgba(234,179,8,1)] opacity-100'
+            : 'bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-50'}`}
         ></div>
 
         {/* Lightning Icon */}
@@ -120,10 +133,10 @@ const FlipCard: React.FC<FlipCardProps> = ({ data }) => {
 
         {/* Main Content - Always Visible */}
         <div className="flex flex-col items-center text-center z-10 relative">
-          <h3 className={`text-base md:text-xl font-bold text-slate-100 mb-2 md:mb-4 font-serif leading-tight transition-all relative z-10 ${isExpanded ? 'text-transparent bg-clip-text bg-gradient-to-r from-purple-200 to-violet-200' : ''}`}>
+          <h3 className={`text-base md:text-xl font-bold text-slate-100 mb-2 md:mb-4 font-serif leading-tight transition-all relative z-10 ${isExpanded ? 'text-transparent bg-clip-text bg-gradient-to-r from-amber-200 to-yellow-200' : ''}`}>
             {data.title}
           </h3>
-          <div className={`h-1 rounded-full mb-2 md:mb-4 transition-all duration-500 relative z-10 ${isExpanded ? 'w-16 bg-gradient-to-r from-purple-500 to-violet-500' : 'w-8 md:w-12 bg-slate-800'}`}></div>
+          <div className={`h-1 rounded-full mb-2 md:mb-4 transition-all duration-500 relative z-10 ${isExpanded ? 'w-16 bg-gradient-to-r from-amber-400 to-yellow-500' : 'w-8 md:w-12 bg-slate-800'}`}></div>
           <p className="text-slate-400 font-medium text-xs md:text-sm leading-relaxed font-sans line-clamp-3 md:line-clamp-none px-1 md:px-2">
             {data.frontSummary}
           </p>
@@ -133,8 +146,8 @@ const FlipCard: React.FC<FlipCardProps> = ({ data }) => {
           {data.tags?.slice(0, 3).map(tag => (
             <span key={tag} className={`text-[8px] md:text-[10px] uppercase tracking-wider px-2 md:px-2.5 py-0.5 rounded-full border transition-all duration-300
               ${isExpanded
-                ? 'border-purple-400/70 text-purple-200 bg-purple-500/15 shadow-[0_0_15px_rgba(139,92,246,0.5)]'
-                : 'border-cyan-500/50 text-cyan-300 bg-cyan-500/10 shadow-[0_0_10px_rgba(6,182,212,0.3)]'}`}>
+                ? 'border-amber-400/70 text-amber-200 bg-amber-500/15 shadow-[0_0_15px_rgba(234,179,8,0.5)]'
+                : 'border-blue-500/50 text-blue-300 bg-blue-500/10 shadow-[0_0_10px_rgba(59,130,246,0.3)]'}`}>
               {tag}
             </span>
           ))}
@@ -142,10 +155,10 @@ const FlipCard: React.FC<FlipCardProps> = ({ data }) => {
 
         {/* Pull Indicator with Rotating Arrow */}
         <div className="text-[8px] md:text-[9px] text-slate-600 mt-3 md:mt-4 uppercase tracking-[0.15em] md:tracking-[0.2em] font-bold transition-colors flex items-center justify-center gap-1 md:gap-1.5">
-          <span className={isExpanded ? 'text-purple-400' : ''}>{isExpanded ? 'সংক্ষিপ্ত' : 'বিস্তারিত'}</span>
+          <span className={isExpanded ? 'text-amber-400' : ''}>{isExpanded ? 'সংক্ষিপ্ত' : 'বিস্তারিত'}</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className={`h-2.5 w-2.5 md:h-3 md:w-3 transition-transform duration-500 ease-out ${isExpanded ? 'rotate-180 text-purple-400' : 'animate-bounce group-hover:text-cyan-400'}`}
+            className={`h-2.5 w-2.5 md:h-3 md:w-3 transition-transform duration-500 ease-out ${isExpanded ? 'rotate-180 text-amber-400' : 'animate-bounce'}`}
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -160,8 +173,8 @@ const FlipCard: React.FC<FlipCardProps> = ({ data }) => {
             transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)', // Spring-like easing
           }}
         >
-          <div className="pt-4 border-t border-purple-500/30">
-            <h4 className="text-[10px] md:text-xs font-bold text-purple-400 mb-2 md:mb-3 uppercase tracking-widest flex items-center gap-2">
+          <div className="pt-4 border-t border-amber-500/30">
+            <h4 className="text-[10px] md:text-xs font-bold text-amber-400 mb-2 md:mb-3 uppercase tracking-widest flex items-center gap-2">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
                 <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
                 <path fillRule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd" />
