@@ -157,7 +157,27 @@
     }
 
     .bottom-nav-item.active {
-      color: #3b82f6;
+      color: #a78bfa;
+    }
+
+    .bottom-nav-item.active span:first-child {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(59, 130, 246, 0.3));
+      border-radius: 50%;
+      padding: 10px;
+      box-shadow: 0 0 20px rgba(139, 92, 246, 0.5), 0 0 40px rgba(59, 130, 246, 0.3);
+      animation: nav-glow-pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes nav-glow-pulse {
+
+      0%,
+      100% {
+        box-shadow: 0 0 15px rgba(139, 92, 246, 0.4), 0 0 30px rgba(59, 130, 246, 0.2);
+      }
+
+      50% {
+        box-shadow: 0 0 25px rgba(139, 92, 246, 0.7), 0 0 45px rgba(59, 130, 246, 0.4);
+      }
     }
 
     .bottom-nav-item:active {
@@ -246,6 +266,18 @@
       background: rgba(59, 130, 246, 0.3);
       border-radius: 50%;
       animation: float-up 8s ease-in-out infinite;
+    }
+
+    /* PWA Standalone Mode - Hide top header for native app feel */
+    @media all and (display-mode: standalone) {
+      .top-header {
+        display: none !important;
+      }
+
+      /* Adjust main content padding when header is hidden */
+      main {
+        padding-top: 0 !important;
+      }
     }
   </style>
 </head>

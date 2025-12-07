@@ -29,7 +29,7 @@ const Navigation: React.FC<NavigationProps> = ({ activeTab, setActiveTab }) => {
   return (
     <>
       {/* Top Navigation */}
-      <nav className="sticky top-0 z-50 glass-strong shadow-lg font-sans">
+      <nav className="top-header sticky top-0 z-50 glass-strong shadow-lg font-sans">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center justify-between h-16">
             <div className="flex-shrink-0 cursor-pointer group touch-feedback" onClick={() => handleTabClick(Tab.HOME)}>
