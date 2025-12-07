@@ -34,8 +34,8 @@ const Section: React.FC<SectionProps> = ({ data }) => {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 lg:gap-10">
-                {group.cards.map((card) => (
-                  <FlipCard key={card.id} data={card} />
+                {group.cards.map((card, cardIndex) => (
+                  <FlipCard key={card.id} data={card} serialNumber={cardIndex + 1} />
                 ))}
               </div>
             </div>
@@ -43,8 +43,8 @@ const Section: React.FC<SectionProps> = ({ data }) => {
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 lg:gap-10">
-          {data.cards.map((card) => (
-            <FlipCard key={card.id} data={card} />
+          {data.cards.map((card, cardIndex) => (
+            <FlipCard key={card.id} data={card} serialNumber={cardIndex + 1} />
           ))}
         </div>
       )}

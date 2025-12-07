@@ -3,9 +3,10 @@ import { CardData } from '../types';
 
 interface FlipCardProps {
   data: CardData;
+  serialNumber?: number;
 }
 
-const FlipCard: React.FC<FlipCardProps> = ({ data }) => {
+const FlipCard: React.FC<FlipCardProps> = ({ data, serialNumber }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const [isTouching, setIsTouching] = useState(false);
@@ -120,6 +121,13 @@ const FlipCard: React.FC<FlipCardProps> = ({ data }) => {
       >
         {/* Animated Gradient Background - Subtle texture */}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-900/10 via-transparent to-purple-900/10 opacity-30 pointer-events-none"></div>
+
+        {/* Serial Number Watermark */}
+        {serialNumber !== undefined && (
+          <div className="absolute top-2 left-3 md:top-4 md:left-5 text-4xl md:text-5xl font-bold text-white/10 pointer-events-none select-none font-serif z-0">
+            {String(serialNumber).padStart(2, '0')}
+          </div>
+        )}
 
         {/* Neon Top Line */}
         <div className={`absolute top-0 left-0 right-0 h-[2px] transition-all duration-500
